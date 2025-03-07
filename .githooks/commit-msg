@@ -1,0 +1,16 @@
+#!/bin/sh
+# Regex para validar a mensagem do commit
+PATTERN="^(feat|fix|docs|style|refactor|test|chore): .+"
+
+# Lê a mensagem do commit
+COMMIT_MSG=$(cat "$1")
+
+# Verifica se a mensagem segue o padrão
+if ! echo "$COMMIT_MSG" | grep -Eq "$PATTERN"; then
+    echo "? ERRO: A mensagem do commit não segue o padrão!"
+    echo "   Use: feat: descrição, fix: descrição, etc."
+    exit 1
+fi
+
+# Se passou na validação, permite o commit
+exit 0
